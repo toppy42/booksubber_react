@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Page from './layouts/Page';
 import ContentSyncRow from './components/ContentSyncRow';
