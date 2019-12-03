@@ -2,10 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class ContentArea extends React.Component {
-  static defaultProps = {
-    contentList: ['test1'],
-  };
-
   constructor(props) {
     super(props);
   }

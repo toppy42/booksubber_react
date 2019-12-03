@@ -1,15 +1,13 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Page from './layouts/Page';
-import ContentSyncRow from './components/ContentSyncRow';
-import ControlRow from './components/ControlRow';
+import SyncEditingArea from './components/SyncEditingArea';
 
 function App() {
   return (
     <div className="w-100">
       <Page>
-        <ContentSyncRow />
-        <ControlRow />
+        <SyncEditingArea />
       </Page>
     </div>
   );
