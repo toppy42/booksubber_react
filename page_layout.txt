@@ -1,0 +1,30 @@
+Page:
+- Working Area
+    - Alternating:
+    - ContentSyncArea
+        - TextContentArea
+            - Content Area
+                - List of textContentBlock
+        - audioContentArea
+            - ContentArea
+                - List of audioContentBlocks
+                    - Silence or Audio
+        - audioPlayButton
+            - Initiates playing of audio range within the audioContentArea
+        - deletionButton
+            - Checks for empty
+            - Removes the ContentSyncArea if empty
+    - Controls
+        - newContentSyncAreaButton
+        - textContentPushers
+        - audioContentPushers
+            - contentPusher
+                - Tells adjacent contentSyncAreas to push or pop text or audio
+
+
+Steps in dev:
+- Static layout with divs
+- Map out interactions
+    - Add new content sync area
+    - Move content from one area to another
+    - delete content area (with empty checks)
