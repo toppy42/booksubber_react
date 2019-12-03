@@ -7,7 +7,7 @@ class Page extends React.Component {
         }
 
         return (
-            <div className="border shadow mx-auto p-3 w-100" style={styles}>
+            <div className="container border shadow" style={styles}>
                 {this.props.children}
             </div>
         )

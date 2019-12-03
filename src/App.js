@@ -2,7 +2,8 @@ import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Page from './layouts/Page'
-import ContentSyncBlock from './components/ContentSyncBlock'
+import ContentSyncRow from './components/ContentSyncRow'
+import ControlRow from './components/ControlRow'
 
 var divHeight = {
     height: '100px'
@@ -10,9 +11,10 @@ var divHeight = {
 
 function App() {
   return (
-    <div className="px-5 w-100">
+    <div className="w-100">
         <Page>
-            <ContentSyncBlock />
+            <ContentSyncRow />
+            <ControlRow />
         </Page>
     </div>
   );
