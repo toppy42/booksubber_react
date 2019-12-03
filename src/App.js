@@ -5,8 +5,8 @@ import Page from './layouts/Page'
 import ContentSyncRow from './components/ContentSyncRow'
 import ControlRow from './components/ControlRow'
 
-var divHeight = {
-    height: '100px'
+ var div_height = {
+              height: '100px'
 }
 
 function App() {
