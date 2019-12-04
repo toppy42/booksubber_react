@@ -10,8 +10,8 @@ class ControlRow extends React.Component {
             role="group"
             aria-label="Text Controls"
           >
-            <button className="btn btn-secondary">▽</button>
-            <button className="btn btn-secondary">△</button>
+            <button className="btn btn-secondary" type="button">▽</button>
+            <button className="btn btn-secondary" type="button">△</button>
           </div>
         </div>
         <div className="col-sm-3" style={{}}>
@@ -20,7 +20,7 @@ class ControlRow extends React.Component {
             role="group"
             aria-label="New Sync Area"
           >
-            <button className="btn btn-secondary">+</button>
+            <button className="btn btn-secondary" type="button">+</button>
           </div>
         </div>
         <div className="col-sm" style={{}}>
@@ -29,8 +29,8 @@ class ControlRow extends React.Component {
             role="group"
             aria-label="Audio Controls"
           >
-            <button className="btn btn-secondary">▽</button>
-            <button className="btn btn-secondary">△</button>
+            <button className="btn btn-secondary" type="button">▽</button>
+            <button className="btn btn-secondary" type="button">△</button>
           </div>
         </div>
       </div>

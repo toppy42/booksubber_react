@@ -10,32 +10,27 @@ class SyncEditingArea extends React.Component {
     this.state = {
       syncGroups: [
         new SyncGroup(['this is some text'], ['this is some audio']),
-        new SyncGroup(['segment2 text'], ['segment2 audio'])
+        new SyncGroup(['segment2 text'], ['segment2 audio']),
       ],
     };
   }
 
+  generateContentSyncRow(syncGroup) {
+    return [
+      <ContentSyncRow
+        textContentList={syncGroup.textContentList}
+        audioContentList={syncGroup.audioContentList}
+      />,
+      <ControlRow />,
+    ];
+  }
+
   generateContentSyncRows() {
-    return(
-      this.state.syncGroups.map(function(syncGroup){
-        return([
-            <ContentSyncRow
-              textContentList={syncGroup.textContentList}
-              audioContentList={syncGroup.audioContentList}
-            />,
-            <ControlRow />
-          ]
-        )
-      })
-    );
+    return this.state.syncGroups.map(this.generateContentSyncRow);
   }
 
   render() {
-    return (
-      <div>
-        {this.generateContentSyncRows()}
-      </div>
-    );
+    return <div>{this.generateContentSyncRows()}</div>;
   }
 }
 
