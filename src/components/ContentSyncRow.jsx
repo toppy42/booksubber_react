@@ -9,7 +9,7 @@ class ContentSyncRow extends React.Component {
 
   render() {
     return (
-      <div className="row border" style={{ height: '100px' }}>
+      <div className="row border" style={{ minHeight: '100px' }}>
         <div className="col-sm" style={{ backgroundColor: 'blue' }}>
           <ContentArea contentList={this.props.textContentList}/>
         </div>
