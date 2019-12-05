@@ -1,8 +1,7 @@
 import React from 'react';
-import ContentArea from './ContentArea';
+import ContentSyncRow from './ContentSyncRow';
 import ControlRow from './ControlRow';
 import SyncGroup from '../data_components/SyncGroup';
-import ContentSyncRow from './ContentSyncRow';
 
 class SyncEditingArea extends React.Component {
   constructor(props) {
@@ -23,7 +22,7 @@ class SyncEditingArea extends React.Component {
 
   pushTextContentUp(index) {
     const tempSyncGroups = this.state.syncGroups.slice();
-    const sourceSyncGroup = tempSyncGroups[index + 1]
+    const sourceSyncGroup = tempSyncGroups[index + 1];
     const destinationSyncGroup = tempSyncGroups[index];
 
     const movedText = sourceSyncGroup.popStartText();
@@ -36,7 +35,7 @@ class SyncEditingArea extends React.Component {
 
   pushTextContentDown(index) {
     const tempSyncGroups = this.state.syncGroups.slice();
-    const sourceSyncGroup = tempSyncGroups[index]
+    const sourceSyncGroup = tempSyncGroups[index];
     const destinationSyncGroup = tempSyncGroups[index + 1];
 
     const movedText = sourceSyncGroup.popEndText();
@@ -48,7 +47,7 @@ class SyncEditingArea extends React.Component {
 
   pushAudioContentUp(index) {
     const tempSyncGroups = this.state.syncGroups.slice();
-    const sourceSyncGroup = tempSyncGroups[index + 1]
+    const sourceSyncGroup = tempSyncGroups[index + 1];
     const destinationSyncGroup = tempSyncGroups[index];
 
     const movedAudio = sourceSyncGroup.popStartAudio();
@@ -61,7 +60,7 @@ class SyncEditingArea extends React.Component {
 
   pushAudioContentDown(index) {
     const tempSyncGroups = this.state.syncGroups.slice();
-    const sourceSyncGroup = tempSyncGroups[index]
+    const sourceSyncGroup = tempSyncGroups[index];
     const destinationSyncGroup = tempSyncGroups[index + 1];
 
     const movedAudio = sourceSyncGroup.popEndAudio();
@@ -72,29 +71,18 @@ class SyncEditingArea extends React.Component {
   }
 
   generateContentSyncRows() {
-    console.log('generateContentSyncRows')
-    console.log(this)
-
     // Why do I have to bind this here?
     return this.state.syncGroups.map(this.generateContentSyncRow.bind(this));
   }
 
   generateContentSyncRow(syncGroup, syncGroupIndex) {
-    const textUpButtonCallback = () => {
-      return this.pushTextContentUp(syncGroupIndex);
-    }
+    const textUpButtonCallback = () => this.pushTextContentUp(syncGroupIndex);
 
-    const textDownButtonCallback = () => {
-      return this.pushTextContentDown(syncGroupIndex);
-    }
+    const textDownButtonCallback = () => this.pushTextContentDown(syncGroupIndex);
 
-    const audioUpButtonCallback = () => {
-      return this.pushAudioContentUp(syncGroupIndex);
-    }
+    const audioUpButtonCallback = () => this.pushAudioContentUp(syncGroupIndex);
 
-    const audioDownButtonCallback = () => {
-      return this.pushAudioContentDown(syncGroupIndex);
-    }
+    const audioDownButtonCallback = () => this.pushAudioContentDown(syncGroupIndex);
 
     return [
       <ContentSyncRow
