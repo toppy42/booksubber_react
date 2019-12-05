@@ -1,6 +1,8 @@
 import React from 'react';
-import ContentArea from './ContentArea';
 import PropTypes from 'prop-types';
+
+import ContentArea from './ContentArea';
+import AudioPlayer from './AudioPlayer';
 
 class ContentSyncRow extends React.Component {
   constructor(props){
@@ -13,7 +15,9 @@ class ContentSyncRow extends React.Component {
         <div className="col-sm" style={{ backgroundColor: 'blue' }}>
           <ContentArea contentList={this.props.textContentList}/>
         </div>
-        <div className="col-sm-3" style={{ backgroundColor: 'white' }}></div>
+        <div className="col-sm-3" style={{ backgroundColor: 'white' }}>
+          <AudioPlayer />
+        </div>
         <div className="col-sm" style={{ backgroundColor: 'red' }}>
           <ContentArea contentList={this.props.audioContentList}/>
         </div>
@@ -24,7 +28,8 @@ class ContentSyncRow extends React.Component {
 
 ContentArea.propTypes = {
   textContentList: PropTypes.array,
-  audioContentList: PropTypes.array
+  audioContentList: PropTypes.array,
+  audioFile: PropTypes.string
 };
 
 export default ContentSyncRow;
