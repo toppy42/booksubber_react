@@ -88,7 +88,6 @@ class AudioPlayer extends React.Component {
   }
 
   onAudioEnd() {
-    console.log('onAudioEnd');
     this.resetPlayStatus();
   }
 
@@ -97,10 +96,11 @@ class AudioPlayer extends React.Component {
     const endTime = parseFloat(this.endTime);
     let timeDiff = (endTime - startTime) * 1000;
 
-    setTimeout(() => this.pauseAudio(), timeDiff);
+    this.audioTimeout = setTimeout(() => this.pauseAudio(), timeDiff);
   }
 
   resetPlayStatus() {
+    clearTimeout(this.audioTimeout);
     const audioEl = this.audioElement.current;
     audioEl.currentTime = this.startTime;
     this.setState({ isPlaying: false });
@@ -112,6 +112,7 @@ class AudioPlayer extends React.Component {
   }
 
   render() {
+    // Note: I'm not sure the on AudioEnd callbacks are necessary or not
     return (
       <div>
         {this.renderPlayController()}
