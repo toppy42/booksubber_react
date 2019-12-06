@@ -34,8 +34,8 @@ class AudioPlayer extends React.Component {
     super(props);
     this.audioElement = React.createRef();
 
-    this.startTime = '1';
-    this.endTime = '2.567';
+    this.startTime = this.props.startTime;
+    this.endTime = this.props.endTime;
     this.sourceUrl = './book_sample.m4a';
 
     this.audioTimeout = null;
@@ -45,8 +45,14 @@ class AudioPlayer extends React.Component {
     };
   }
 
+  audioIsValid() {
+    return (this.startTime !== null && this.endTime !== null);
+  }
+
   componentDidMount() {
-    this.resetPlayStatus();
+    if (this.audioIsValid()) {
+      this.resetPlayStatus();
+    }
   }
 
   playAudio() {
@@ -64,6 +70,10 @@ class AudioPlayer extends React.Component {
   }
 
   renderPlayController() {
+    if (!this.audioIsValid()) {
+      return this.renderInvalidAudio();
+    }
+
     if (this.state.isPlaying) {
       return this.renderPauseButton();
     } else {
@@ -85,6 +95,10 @@ class AudioPlayer extends React.Component {
 
   renderPauseButton() {
     return this.renderButton(this.pauseAudio, '||');
+  }
+
+  renderInvalidAudio(){
+   return this.renderButton(function(){}, 'X');
   }
 
   onAudioEnd() {
@@ -131,6 +145,8 @@ class AudioPlayer extends React.Component {
 
 AudioPlayer.propTypes = {
   audioFile: PropTypes.string,
+  startTime: PropTypes.string,
+  endTime: PropTypes.string
 };
 
 export default AudioPlayer;
