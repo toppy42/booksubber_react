@@ -45,14 +45,25 @@ class AudioPlayer extends React.Component {
     };
   }
 
-  audioIsValid() {
-    return (this.startTime !== null && this.endTime !== null);
-  }
-
   componentDidMount() {
     if (this.audioIsValid()) {
       this.resetPlayStatus();
     }
+  }
+
+  onAudioEnd() {
+    this.resetPlayStatus();
+  }
+
+  audioIsValid() {
+    return this.startTime !== null && this.endTime !== null;
+  }
+
+  // Audio Manipulation Methods
+  pauseAudio() {
+    const audioEl = this.audioElement.current;
+    audioEl.pause();
+    this.resetPlayStatus();
   }
 
   playAudio() {
@@ -62,53 +73,10 @@ class AudioPlayer extends React.Component {
     this.setState({ isPlaying: true });
   }
 
-  pauseAudio() {
-    // Need to reset the current time
-    const audioEl = this.audioElement.current;
-    audioEl.pause();
-    this.resetPlayStatus();
-  }
-
-  renderPlayController() {
-    if (!this.audioIsValid()) {
-      return this.renderInvalidAudio();
-    }
-
-    if (this.state.isPlaying) {
-      return this.renderPauseButton();
-    } else {
-      return this.renderPlayButton();
-    }
-  }
-
-  renderButton(callback, symbol) {
-    return (
-      <button onClick={callback.bind(this)}>
-        <span>{symbol}</span>
-      </button>
-    );
-  }
-
-  renderPlayButton() {
-    return this.renderButton(this.playAudio, '|>');
-  }
-
-  renderPauseButton() {
-    return this.renderButton(this.pauseAudio, '||');
-  }
-
-  renderInvalidAudio(){
-   return this.renderButton(function(){}, 'X');
-  }
-
-  onAudioEnd() {
-    this.resetPlayStatus();
-  }
-
   limitAudio() {
     const startTime = parseFloat(this.startTime);
     const endTime = parseFloat(this.endTime);
-    let timeDiff = (endTime - startTime) * 1000;
+    const timeDiff = (endTime - startTime) * 1000;
 
     this.audioTimeout = setTimeout(() => this.pauseAudio(), timeDiff);
   }
@@ -120,9 +88,37 @@ class AudioPlayer extends React.Component {
     this.setState({ isPlaying: false });
   }
 
-  generateAudioUrl() {
-    return this.sourceUrl;
-    // return `${this.sourceUrl}#t=${this.startTime},${this.endTime}`;
+  // Render Methods
+  renderPlayController() {
+    if (!this.audioIsValid()) {
+      return this.renderInvalidAudio();
+    }
+
+    if (this.state.isPlaying) {
+      return this.renderPauseButton();
+    }
+
+    return this.renderPlayButton();
+  }
+
+  renderInvalidAudio() {
+    return this.renderButton(() => {}, 'X');
+  }
+
+  renderPlayButton() {
+    return this.renderButton(this.playAudio, '|>');
+  }
+
+  renderPauseButton() {
+    return this.renderButton(this.pauseAudio, '||');
+  }
+
+  renderButton(callback, symbol) {
+    return (
+      <button onClick={callback.bind(this)}>
+        <span>{symbol}</span>
+      </button>
+    );
   }
 
   render() {
@@ -136,7 +132,7 @@ class AudioPlayer extends React.Component {
           onPause={this.onAudioEnd.bind(this)}
           onEnded={this.onAudioEnd.bind(this)}
         >
-          <source src={this.generateAudioUrl()} />
+          <source src={this.sourceUrl} />
         </audio>
       </div>
     );
@@ -145,8 +141,8 @@ class AudioPlayer extends React.Component {
 
 AudioPlayer.propTypes = {
   audioFile: PropTypes.string,
-  startTime: PropTypes.string,
-  endTime: PropTypes.string
+  startTime: PropTypes.number,
+  endTime: PropTypes.number,
 };
 
 export default AudioPlayer;
