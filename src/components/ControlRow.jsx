@@ -30,7 +30,7 @@ class ControlRow extends React.Component {
             role="group"
             aria-label="New Sync Area"
           >
-            <button className="btn btn-secondary" type="button">
+            <button className="btn btn-secondary" type="button" onClick={this.props.addButtonCenter}>
               +
             </button>
           </div>

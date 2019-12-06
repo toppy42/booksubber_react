@@ -12,6 +12,7 @@ class SyncEditingArea extends React.Component {
     super(props);
     this.state = {
       syncGroups: [
+        new SyncGroup([], []),
         new SyncGroup(
           [
             'El niño que vivió',
@@ -108,6 +109,14 @@ class SyncEditingArea extends React.Component {
     this.setState({ syncGroups: tempSyncGroups });
   }
 
+  addNewSyncGroup(prevSyncGroupIndex) {
+    const newSyncGroup = new SyncGroup([], []);
+    const tempSyncGroups = this.state.syncGroups.slice();
+    tempSyncGroups.splice(prevSyncGroupIndex + 1, 0, newSyncGroup);
+
+    this.setState({ syncGroups: tempSyncGroups });
+  }
+
   generateContentSyncRows() {
     // Why do I have to bind this here?
     return this.state.syncGroups.map(this.generateContentSyncRow.bind(this));
@@ -124,6 +133,9 @@ class SyncEditingArea extends React.Component {
     const audioDownButtonCallback = () =>
       this.pushAudioContentDown(syncGroupIndex);
 
+    const addNewSyncGroupCallback = () =>
+      this.addNewSyncGroup(syncGroupIndex);
+
     return [
       <ContentSyncRow
         textContentList={syncGroup.textContentList}
@@ -135,6 +147,7 @@ class SyncEditingArea extends React.Component {
         downButtonLeft={textDownButtonCallback}
         upButtonRight={audioUpButtonCallback}
         downButtonRight={audioDownButtonCallback}
+        addButtonCenter={addNewSyncGroupCallback}
       />,
     ];
   }

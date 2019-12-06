@@ -34,8 +34,6 @@ class AudioPlayer extends React.Component {
     super(props);
     this.audioElement = React.createRef();
 
-    this.startTime = this.props.startTime;
-    this.endTime = this.props.endTime;
     this.sourceUrl = './book_sample.m4a';
 
     this.audioTimeout = null;
@@ -56,7 +54,7 @@ class AudioPlayer extends React.Component {
   }
 
   audioIsValid() {
-    return this.startTime !== null && this.endTime !== null;
+    return this.props.startTime !== null && this.props.endTime !== null;
   }
 
   // Audio Manipulation Methods
@@ -74,8 +72,8 @@ class AudioPlayer extends React.Component {
   }
 
   limitAudio() {
-    const startTime = parseFloat(this.startTime);
-    const endTime = parseFloat(this.endTime);
+    const startTime = parseFloat(this.props.startTime);
+    const endTime = parseFloat(this.props.endTime);
     const timeDiff = (endTime - startTime) * 1000;
 
     this.audioTimeout = setTimeout(() => this.pauseAudio(), timeDiff);
@@ -84,7 +82,7 @@ class AudioPlayer extends React.Component {
   resetPlayStatus() {
     clearTimeout(this.audioTimeout);
     const audioEl = this.audioElement.current;
-    audioEl.currentTime = this.startTime;
+    audioEl.currentTime = this.props.startTime;
     this.setState({ isPlaying: false });
   }
 
@@ -102,7 +100,7 @@ class AudioPlayer extends React.Component {
   }
 
   renderInvalidAudio() {
-    return this.renderButton(() => {}, 'X');
+    return (<div/>)
   }
 
   renderPlayButton() {
