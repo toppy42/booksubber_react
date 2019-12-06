@@ -49,6 +49,20 @@ class AudioPlayer extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (!this.audioIsValid()) {
+      return;
+    }
+
+    if (this.props.startTime !== prevProps.startTime) {
+      this.resetAudioPlayer();
+    }
+
+    if (this.props.endTime !== prevProps.endTime) {
+      this.resetAudioPlayer();
+    }
+  }
+
   onAudioEnd() {
     this.resetPlayStatus();
   }
@@ -80,10 +94,14 @@ class AudioPlayer extends React.Component {
   }
 
   resetPlayStatus() {
+    this.resetAudioPlayer();
+    this.setState({ isPlaying: false });
+  }
+
+  resetAudioPlayer() {
     clearTimeout(this.audioTimeout);
     const audioEl = this.audioElement.current;
     audioEl.currentTime = this.props.startTime;
-    this.setState({ isPlaying: false });
   }
 
   // Render Methods
